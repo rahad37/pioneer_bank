@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pioneer Bank</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+    <div id="full-page">
+    <h1 class="text-center">Welcome To The Pioneer Bank</h1>
+    <div id="form">
+        <h4>Login</h4>
+        <input type="text" class="form-control" placeholder="Your Email Address"><br>
+        <input type="password" class="form-control" placeholder="Password"><br>
+        <button id="logIn" class="btn btn-success">Submit</button>
+    </div>
+</div>
+<div id="transaction">
+    <h1>Transaction Area</h1>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="box">
+                <h5>Deposit</h5>
+                <h2>$<span id="currentAmount">00</span></h2>
+            </div>     
+        </div>
+        <div class="col-md-4">
+            <div class="box bg-secondary">
+                <h5>Withdraw</h5>
+                <h2>$<span id="currentWithdraw">00</span></h2>
+            </div>  
+        </div>
+        <div class="col-md-4">
+            <div class="box bg-primary">
+                <h5>Total Balance</h5>
+                <h2>$<span id="totalBalance">1200</span></h2>
+            </div>  
+        </div>
+    </div>
+
+<div id="last-part">
+    <div class="row mt-3">
+        <div class="col-md-6">
+            <div id="form">
+                <h3>Deposit</h3>
+                <input id="depositAmount" type="text" placeholder="$ amount you want to deposit" class="form-control"><br>
+                <button id="depositBtn" class="btn btn-primary">Deposit</button>
+            </div>          
+        </div>
+        <div class="col-md-6">
+            <div id="form">
+                <h3>Withdraw</h3>
+                <input id="withdrawAmount" type="text" placeholder="$ amount you want to withdraw" class="form-control"><br>
+                <button id="withdrawBtn" class="btn btn-primary">Withdraw</button>
+            </div>         
+        </div>
+    </div>
+</div>
+</div>
+
+
+    <script src="js/bootstrap.min.js"></script>
+    <script>
+
+        // ============ Log In button ============
+        const clickIn = document.getElementById("logIn");
+        clickIn.addEventListener('click', function(){
+            const fullPage = document.getElementById("full-page");
+            fullPage.style.display = "none";
+            const balance = document.getElementById("transaction");
+            balance.style.display = "block";
+        })
+        // // ============ Deposit Button ============
+        const depositButton = document.getElementById("depositBtn");
+        depositButton.addEventListener('click', function(){
+        const depositNumber = update("depositAmount");
+        
+        updateBalance("currentAmount", depositNumber);
+        updateBalance("totalBalance", depositNumber);
+        document.getElementById("depositAmount").value = "";
+        })
+        // ============= withdraw Button =============
+        const withdrawButton = document.getElementById("withdrawBtn");
+        withdrawButton.addEventListener('click', function(){
+        const withdrawNumber = update("withdrawAmount");
+
+        updateBalance("currentWithdraw", withdrawNumber);
+        updateBalance("totalBalance", -1 * withdrawNumber);
+        document.getElementById("withdrawAmount").value = "";
+        })
+        function update(id){
+        const Amount = document.getElementById(id).value;
+        const amountNumber = parseFloat(Amount);
+        return amountNumber;
+        }
+
+        function updateBalance(id, depositNumber){
+            const totalBalance = document.getElementById(id).innerText;
+            const balanceNumber = parseFloat(totalBalance);
+            const totalAmount = depositNumber + balanceNumber;
+            document.getElementById(id).innerText = totalAmount;
+        }
+
+     </script>
+</body>
+</html>

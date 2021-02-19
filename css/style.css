@@ -1,0 +1,18 @@
+body{
+    padding: 100px;
+}
+#form{
+    margin-top: 50px;
+    box-shadow: 5px 5px 10px gray;
+    border-radius: 10px;
+    padding: 50px;
+}
+#transaction{
+    display: none;
+}
+.box{
+    background: tomato;
+    padding: 40px;
+    border-radius: 10px;
+    margin: 0 30px;
+}
